@@ -48,7 +48,6 @@ const [ totalVenta, setTotalVenta ] = useState(0);
 
     return (
         <>
-            <div>TableData</div>
             {//skuData && ( //Se renderiza solo si existe skuData
             <table className="table table-success table-striped table-hover">
                 <thead>

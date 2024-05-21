@@ -5,11 +5,18 @@
 }
 
 body {
+    /* BODY ORIGINAL    
     background: #a6a6a6;
     text-align: center;
     align-items: center;
+    justify-content: center;  */
+    background: linear-gradient(135deg, #d1d1d1, #a6a6a6);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    align-items: center;
     justify-content: center;
-    
+    height: 100vh; /* Asegúrate de que cubra toda la pantalla */
+    margin: 0;
     }
 
 li {

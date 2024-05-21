@@ -1,0 +1,135 @@
+/* facturacion.css */
+.container-inputs-fact {
+    /*background-color: #ddeedc;*/
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+  
+  .table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .table tfoot th, .table tfoot td {
+    border-top: 2px solid #dee2e6;
+  }
+  
+  .form-container-fact {
+    /*background-color: #f7f7f7;*/
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .form-label {
+    color: #34495e;
+    font-weight: bold;
+  }
+  
+  .form-control, .form-select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  .btn-lg {
+    font-size: 1.25rem;
+  }
+  
+  .btn-success {
+    /*background-color: #28a745;*/
+    border: none;
+  }
+  
+  .btn-success:hover {
+    background-color: #c75c14;
+  }
+  
+  .table-success {
+    background-color: #d4edda;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+  }
+  
+  table th, table td {
+    text-align: center;
+  }
+  
+  label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  
+  #container-vta-forms {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  input[type="date"] {
+    width: 100%;
+  }
+  
+  input[type="number"] {
+    width: 100%;
+  }
+  
+  .select-caja {
+    width: 100%;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  #cerrar-venta {
+    width: 100%;
+    /*background-color: #28a745;*/
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 1.25rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #cerrar-venta:hover {
+    background-color: #218838;
+  }
+  

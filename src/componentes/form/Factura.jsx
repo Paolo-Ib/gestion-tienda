@@ -84,6 +84,48 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
     <>
       <div className="form-container-fact">
         <form onSubmit={onSubmit}>
+          { /*  Seccion de Items SKU */}
+          <div className="row">
+            <div className="col-6">
+              <SearchSku
+                register={register}
+                onSkuSelect={handleSkuSelect}
+                resetearSku={resetearSearchSku}
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="input-precio" className="form-label">
+                Precio
+              </label>
+              <input
+                className="form-control"
+                type="number"
+                id="input-precio"
+                placeholder="$ 0,00"
+                {...register("precio", { valueAsNumber: true })}
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="input-cantidad" className="form-label">
+                Cantidad
+              </label>
+              <input
+                className="form-control"
+                type="number"
+                id="input-cantidad"
+                placeholder="0"
+                {...register("cantidad", { valueAsNumber: true })}
+              />
+            </div>
+            <div className="col">
+              <button type="submit" className="btn btn-success btn-lg">
+                Agregar Producto
+              </button>
+            </div>
+          </div>                    
+          { /* Fin Seccion SKU */}
+          <hr />
+          { /* Seccion Venta 1 */ }
           <div className="row">
             <div className="col">
               <label htmlFor="input-fecha" className="form-label">Fecha</label>
@@ -111,7 +153,9 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
               </select>
             </div>
           </div>
+          { /* Fin Seccion Venta 1 */ }
           <hr />
+          { /* Seccion Venta 2 */ }
           <div className="row">
             <div className="col">
               <label htmlFor="select-tipo-venta" className="form-label">
@@ -173,56 +217,18 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
               </select>
             </div>
           </div>
-          <hr />
-          <div className="row">
-            <div className="col-6">
-              <SearchSku
-                register={register}
-                onSkuSelect={handleSkuSelect}
-                resetearSku={resetearSearchSku}
-              />
-            </div>
-            <div className="col">
-              <label htmlFor="input-precio" className="form-label">
-                Precio
-              </label>
-              <input
-                className="form-control"
-                type="number"
-                id="input-precio"
-                placeholder="$ 0,00"
-                {...register("precio", { valueAsNumber: true })}
-              />
-            </div>
-            <div className="col">
-              <label htmlFor="input-cantidad" className="form-label">
-                Cantidad
-              </label>
-              <input
-                className="form-control"
-                type="number"
-                id="input-cantidad"
-                placeholder="0"
-                {...register("cantidad", { valueAsNumber: true })}
-              />
-            </div>
-          </div>
+          { /* Fin Seccion Venta 2 */ }
           <hr />
           <div className="row">
             <div className="col">
               <button type="button" className="btn btn-success btn-lg">
-                Cargar datos Cliente
-              </button>
-            </div>
-            <div className="col">
-              <button type="submit" className="btn btn-success btn-lg">
-                Agregar Producto
+                Cerrar Venta
               </button>
             </div>
           </div>
-          <div>
+          { /*<div>
             <pre>{JSON.stringify(watch(), null, 2)}</pre>
-          </div>
+          </div> */}
         </form>
       </div>
     </>

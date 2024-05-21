@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Factura } from "../../../src/componentes/form/Factura"
 import { TableData } from "../../../src/componentes/form/Table"
+import "../../../src/estilos/facturacion.css"
 
 export default function Operaciones() {
 
@@ -26,19 +27,20 @@ export default function Operaciones() {
     <>
     <div className="container-inputs-fact" id="container-vta-forms"> 
     <h1>Facturación</h1>   
-    <Factura 
-    handleDataTableSubmit={handleDataTableSubmit}
-    handleTipoPagoChange={handleTipoPagoChange}
-    />
-    <hr />
+
     { <TableData 
       skuData={formData} 
       onItemBorrado={handleItemBorrado} 
       tipoPago={tipoPago} 
     /> }
-    </div>
     <hr />
 
+    <Factura 
+    handleDataTableSubmit={handleDataTableSubmit}
+    handleTipoPagoChange={handleTipoPagoChange}
+    />
+
+    </div>
     </>
     )
 }
