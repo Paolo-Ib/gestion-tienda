@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { IoList } from "react-icons/io5";
+import { useDebounce } from 'use-debounce';
 import '../../estilos/SearchSku.css';
 import { useFetchSku } from '../../hook/useFetchSku';
 
@@ -18,15 +19,16 @@ const getFiltroSku = (query, items) => {
 
 export const SearchSku = ({onSkuSelect, resetearSku}) => {
   const [query, setQuery] = useState("");
+  const [debounceQuery] = useDebounce(query, 750); // Usamos debounce con un retraso de 500ms
   const [showOptions, setShowOptions] = useState(false); // Estado para controlar la visibilidad del <ul>
-  const [selectedItem, setSelectedItem] = useState(""); // Estado para almacenar el ítem seleccionado
-  const [selectedSku, setSelectedSku] = useState(""); // State to store selected item data
+  //const [selectedItem, setSelectedItem] = useState(""); // Estado para almacenar el ítem seleccionado
+  //const [selectedSku, setSelectedSku] = useState(""); // State to store selected item data
 
   const data = useFetchSku(process.env.NEXT_PUBLIC_API_URL);
   const items = data || [];
 
 
-  const filtroSku = getFiltroSku(query, items);
+  const filtroSku = getFiltroSku(debounceQuery, items);
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -37,6 +39,7 @@ export const SearchSku = ({onSkuSelect, resetearSku}) => {
   const handleOptionSelect = (item) => {
     setQuery(`${item.id} - ${item.nombre}`);
     setShowOptions(false); // Ocultar opciones al seleccionar una
+    //setSelectedItem(item);
     onSkuSelect(item);  
   };
 
@@ -44,9 +47,10 @@ export const SearchSku = ({onSkuSelect, resetearSku}) => {
     // Si se llama a la función 'resetear', restablece el estado del componente
     if (resetearSku) {
       setQuery("");
-      setShowOptions(false);
+      //setShowOptions(false);
+      //setSelectedItem(null);
     }
-  }, [resetearSku]);
+  }, [resetearSku]);   
 
   return (
     <>

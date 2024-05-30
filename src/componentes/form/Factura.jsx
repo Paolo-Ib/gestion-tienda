@@ -7,76 +7,75 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
   const {
     register,
     handleSubmit,
-    watch, // Retrieves the current form state
+    //watch, // Retrieves the current form state
     formState: { errors },
     reset,
   } = useForm();
 
   const [clienteSeleccionado, setClienteSeleccionado] = useState(null); // State to store the selected customer
   const [skuSeleccionado, setSkuSeleccionado] = useState(null); // State to store the selected SKU
+  const [ventaData, setVentaData] = useState(null);
 
   const onSubmit = handleSubmit((data) => {
-    console.log({ ...data, /*cliente: clienteSeleccionado, sku: skuSeleccionado*/ });
+    //console.log({ ...data, /*cliente: clienteSeleccionado, sku: skuSeleccionado*/ });
+    if (!clienteSeleccionado) {
+      console.log("Por favor seleccione un cliente.");
+      return;
+    }
 
-    //DATOS DE SKUs PARA VISTA DE TABLA //
-    const {id, nombre, ume} = skuSeleccionado;
-    const {idC, nombreC, cuit, categoria } = clienteSeleccionado;
+    if (!ventaData) {
+      setVentaData({
+        fecha: data.fecha,
+        caja: data.caja,
+        tipo_venta: data.venta,
+        'medio_pago': data.medio_pago,
+        'tipo_pago': data.tipo_pago,
+      });
+    }
 
     const skuData = [{
-      id: id,
-      nombre: nombre,
-      ume: ume, // Assuming "sku" is the intended field here
+      id: skuSeleccionado.id,
+      nombre: skuSeleccionado.nombre,
+      ume: skuSeleccionado.ume,
       precio: data.precio,
       cantidad: data.cantidad,
     }];
 
-    const clienteData = [{
-      id: idC,
-      nombre: nombreC,
-      cuit: cuit,
-      categoria: categoria,
-    }];
+    const unificadoData = {
+      sku: skuData,
+      cliente: clienteSeleccionado,
+      venta: ventaData,
+    };
 
-    const ventaData = [{
-      fecha: data.fecha,
-      caja: data.caja,
-      venta: data.venta,
-      'medio_pago': data.medio_pago,
-      'tipo_pago': data.tipo_pago,
-    }];
-
-    handleDataTableSubmit([...skuData]); // Pass filtered data
+    handleDataTableSubmit([...skuData]);
     handleTipoPagoChange(data.tipo_pago);
-    handleDataTableSku(skuData); // Assuming this function exists to handle SKU data
-    //handleDataTableCliente(clienteData);
-    handleDataTableVenta(ventaData);
-    reset({ precio: "", cantidad: "" }); // Clear the form after submission
+    handleDataTableSku(skuData);
+    // Aquí puedes enviar los datos a tu base de datos
+    enviarDatosABaseDeDatos(unificadoData);
+
+    reset({ precio: "", cantidad: "" });
     resetearSearchSku();
   });
 
-
   const handleClienteSelect = (cliente) => {
-    setClienteSeleccionado(cliente); // Update state with selected customer data
+    setClienteSeleccionado(cliente);
   };
 
   const handleSkuSelect = (sku) => {
-    setSkuSeleccionado(sku); // Update state with selected SKU data
+    setSkuSeleccionado(sku);
   };
 
   const handleDataTableSku = (skuData) => {
-    console.log("Envio datos SKU a Tabla:", skuData);
+    /*console.log("Envio datos SKU a Tabla:", skuData)*/ return skuData;
   };
 
-  const handleDataTableCliente = (clienteData) => {
-    console.log('Envio de datos de CLIENTES a Tabla:', clienteData);
-  };
-
-  const handleDataTableVenta = (ventaData) => {
-    console.log('Envio de datos de Venta a Tabla:', ventaData);
+  const enviarDatosABaseDeDatos = (data) => {
+    // Aquí puedes implementar la lógica para enviar los datos a tu base de datos
+    console.log("Enviando datos a la base de datos:", data);
   };
 
   const resetearSearchSku = () => {
-    setSkuSeleccionado("");
+    setSkuSeleccionado(null);
   };
 
 
@@ -102,7 +101,7 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
                 type="number"
                 id="input-precio"
                 placeholder="$ 0,00"
-                {...register("precio", { valueAsNumber: true })}
+                {...register("precio", { valueAsNumber: true }, { required: true})}
               />
             </div>
             <div className="col">
@@ -114,7 +113,7 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
                 type="number"
                 id="input-cantidad"
                 placeholder="0"
-                {...register("cantidad", { valueAsNumber: true })}
+                {...register("cantidad", { valueAsNumber: true }, { required: true })}
               />
             </div>
             <div className="col">
@@ -136,7 +135,7 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
                 {...register("fecha", { valueAsDate: true })}
               />
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <SearchBar register={register} onSelect={handleClienteSelect} />
             </div>
             <div className="col">
