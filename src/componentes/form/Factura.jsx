@@ -1,6 +1,7 @@
+"use client"
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+//import axios from "axios";
 import { SearchBar } from "./SearchClientes";
 import { SearchSku } from "./SearchSku";
 
@@ -76,15 +77,23 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
     setSkuSeleccionado(null);
   };
 
-  const enviarDatosABaseDeDatos = async (data) => {
-    // Aquí puedes implementar la lógica para enviar los datos a tu base de datos
-    // console.log("Enviando datos a la base de datos:", data);
-    
-    try {
-      const response = await axios.post('https://script.google.com/macros/s/AKfycbxKOUPPBUireI7A9sGaDDWQnlIyygySTx6CtzpjSZVBaRgiDlijTbmgtS_TuhR6ZjIuYg/exec', data/*, { headers: 'no cors' } */);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error al enviar el los Datos', error);
+  const enviarDatosABaseDeDatos = async (unificadoData) => {
+    //event.preventDefault();
+    console.log("Datos del formulario:", unificadoData);
+
+    const response = await fetch("/api/auth/loginSheet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data: unificadoData }),
+    });
+
+    if (response.ok) {
+      console.log("Datos enviados correctamente");
+      // Limpiar formulario o mostrar mensaje de éxito
+    } else {
+      console.error("Error al enviar datos");
     }
   };
 
