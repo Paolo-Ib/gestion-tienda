@@ -221,7 +221,7 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
           <hr />
           <div className="row">
             <div className="col">
-              <button type="button" className="btn btn-success btn-lg">
+              <button type="submit" className="btn btn-success btn-lg">
                 Cerrar Venta
               </button>
             </div>

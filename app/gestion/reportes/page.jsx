@@ -1,4 +1,3 @@
-import  FormSku from '../../../src/componentes/form/FormSku';
 
 const PageReportes = () => {
 
@@ -10,7 +9,7 @@ const PageReportes = () => {
     <div className='search-container'>
       
     </div>
-        <FormSku />
+         <h1>Reportes Pendientes de desarrollo</h1>
     </div>
 
     </>
