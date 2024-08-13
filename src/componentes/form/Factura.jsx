@@ -27,19 +27,20 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
 
     const skuData = [{
       id: skuSeleccionado.id,
-      nombre: skuSeleccionado.nombre,
+      producto: skuSeleccionado.producto,
       ume: skuSeleccionado.ume,
       precio: data.precio,
       cantidad: data.cantidad,
       tipo_pago: data.tipo_pago
     }];
 
-    const newSkuDataList = [/*...skuDataList, */...skuData];
+    const newSkuDataList = [ ...skuDataList, ...skuData];
     setSkuDataList(newSkuDataList);
-    handleDataTableSubmit(newSkuDataList);
+    handleDataTableSubmit(skuData);
     handleTipoPagoChange(data.tipo_pago);
     reset({ precio: "", cantidad: "" });
     resetearSearchSku();
+    
   };
 
   const onSubmitVenta = handleSubmit((data) => {
@@ -56,14 +57,28 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
       tipo_pago: data.tipo_pago
     };
 
-    const unificadoData = {
+    // Iterate over skuDataList and prepare data for each SKU
+    const unificadoData = skuDataList.map((skuData) => ({
       cliente: clienteSeleccionado,
       venta: venta,
-      sku: skuDataList,
-    };
+      sku: skuData,
+    }));
 
     enviarDatosABaseDeDatos(unificadoData);
+      // Resetear los campos de venta después de enviar los datos
+
+  reset({
+    fecha: "",
+    caja: "",
+    venta: "",
+    medio_pago: "",
+    tipo_pago: ""
   });
+  // Clear SKU list
+  setSkuDataList([]);
+  });
+
+  
 
   const handleClienteSelect = (cliente) => {
     setClienteSeleccionado(cliente);
@@ -92,6 +107,7 @@ export const Factura = ({ handleDataTableSubmit, handleTipoPagoChange }) => {
     if (response.ok) {
       console.log("Datos enviados correctamente");
       // Limpiar formulario o mostrar mensaje de éxito
+      reset();
     } else {
       console.error("Error al enviar datos");
     }

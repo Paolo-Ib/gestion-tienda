@@ -1,20 +1,9 @@
-import  FormSku from '../../../src/componentes/form/FormSku';
-
-const PageReportes = () => {
+function PageReportes() {
 
   return (
-    <>
-    
-    <div className='prueba-search-container'>
-    
-    <div className='search-container'>
-      
-    </div>
-        <FormSku />
-    </div>
-
-    </>
+    <div><h1>Modulo de Reportes</h1></div>
   )
-}
 
-export default PageReportes
+ }
+
+export default PageReportes;   

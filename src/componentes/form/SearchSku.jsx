@@ -13,7 +13,7 @@ const getFiltroSku = (query, items) => {
   
   return items.filter(item => {
     // Verifica si el query coincide con el nombre o el id del cliente
-    return item.nombre.toLowerCase().includes(query.toLowerCase()) || item.id.toString() === query;
+    return item.producto.toLowerCase().includes(query.toLowerCase()) || item.id.toString() === query;
   });
 }
 
@@ -37,10 +37,10 @@ export const SearchSku = ({onSkuSelect, resetearSku}) => {
   };
 
   const handleOptionSelect = (item) => {
-    setQuery(`${item.id} - ${item.nombre}`);
-    setShowOptions(false); // Ocultar opciones al seleccionar una
+    setQuery(`${item.id} - ${item.producto}`);
     //setSelectedItem(item);
     onSkuSelect(item);  
+    setShowOptions(false); // Ocultar opciones al seleccionar una
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export const SearchSku = ({onSkuSelect, resetearSku}) => {
         <ul>
           {filtroSku.map((item) => (
             <p key={item.id} onClick={() => handleOptionSelect(item)}>
-              {item.id} - {item.nombre}
+              {item.id} - {item.producto}
               
             </p>
           ))}

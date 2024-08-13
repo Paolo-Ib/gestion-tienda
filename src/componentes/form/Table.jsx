@@ -29,7 +29,7 @@ export const TableData = ({ onItemBorrado, skuData, tipoPago }) => {
                 {skuData.map((item, index) => (
                     <tr key={index}>
                         <td>{item.id}</td>
-                        <td>{item.nombre}</td>
+                        <td>{item.producto}</td>
                         <td>{item.ume}</td>
                         <td>{item.precio}</td>
                         <td>{item.cantidad}</td>

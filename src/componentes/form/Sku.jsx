@@ -26,8 +26,8 @@ export const Sku = ({ register }) => {
       >
         <option value="">Selecciona un producto</option> {/* Default option */}
         {data.map((sku, i) => (
-          <option key={i} value={`${sku.id} - ${sku.nombre}`}>
-            {sku.id} - {sku.nombre}
+          <option key={i} value={`${sku.id} - ${sku.producto}`}>
+            {sku.id} - {sku.producto}
           </option>
         ))}
       </select>

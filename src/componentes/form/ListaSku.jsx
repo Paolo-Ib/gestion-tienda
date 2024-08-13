@@ -10,7 +10,7 @@ const ListaSku = () => {
     <div>
       {jsonData.map(item => (
         <div key={item.id}>
-          <p><b>Nombre:</b> {item.nombre}</p>
+          <p><b>Nombre:</b> {item.producto}</p>
           <p><b>ID:</b> {item.id}</p>
         </div>
       ))}

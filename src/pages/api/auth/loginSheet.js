@@ -30,19 +30,23 @@ export default async function handler(req, res) {
       // Selecciona la primera hoja (puedes cambiar el índice o nombre según necesites)
       const sheet = doc.sheetsByTitle["Operaciones"];
 
-      // Agrega una nueva fila con los datos del formulario
-      /*
-      await sheet.addRow({
-        Fecha: data.Fecha,
-        Empresa: data.Empresa,
-        Nombre: data.Nombre,
-        Concepto: data.Concepto,
-        Tipo: data.Tipo,
-        Monto: data.Monto,
-        Referencia: data.Referencia,
-        Fecha_Vencimiento: data.Fecha_Vencimiento,
-        Observaciones: data.Observaciones,
-      });   */
+      // Itera sobre cada elemento de data y agrega una fila en la hoja
+      for (const item of data) {
+        await sheet.addRow({
+          fecha: item.venta.fecha,
+          'N° Cliente': item.cliente.id,
+          nombre: item.cliente.nombre,
+          caja: item.venta.caja,
+          venta: item.venta.tipo_venta,
+          medio_pago: item.venta.medio_pago,
+          tipo_pago: item.venta.tipo_pago, // Asegúrate de que estás usando item.tipo_pago
+          id: item.sku.id,
+          producto: item.sku.producto, // Asegúrate de tener este campo en el formulario
+          ume: item.sku.ume,
+          precio: item.sku.precio,
+          cantidad: item.sku.cantidad,
+        });
+      }
 
       // Devuelve información básica sobre la hoja
       res.status(200).json({
